@@ -4,6 +4,7 @@ import io.algostrategy.client.omgfin.OmgfinApiRestClient;
 import io.algostrategy.client.omgfin.domain.general.Asset;
 import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 import io.algostrategy.client.omgfin.domain.market.MarketTicker;
+import io.algostrategy.client.omgfin.domain.market.OrderBook;
 
 import java.util.List;
 import java.util.Map;
@@ -38,5 +39,10 @@ public class OmgfinApiRestClientImpl implements OmgfinApiRestClient {
     @Override
     public Map<String, MarketTicker> getMarketTickers() {
         return executeSync(omgfinApiService.getMarketTickers());
+    }
+
+    @Override
+    public OrderBook getOrderBook(String market, Integer limit) {
+        return executeSync(omgfinApiService.getOrderBook(market, limit));
     }
 }

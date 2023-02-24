@@ -4,6 +4,7 @@ import io.algostrategy.client.omgfin.OmgfinApiAsyncRestClient;
 import io.algostrategy.client.omgfin.domain.general.Asset;
 import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 import io.algostrategy.client.omgfin.domain.market.MarketTicker;
+import io.algostrategy.client.omgfin.domain.market.OrderBook;
 
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,13 @@ public class OmgfinApiAsyncRestClientImpl implements OmgfinApiAsyncRestClient {
     public CompletableFuture<Map<String, MarketTicker>> getMarketTickers() {
         CompletableFuture<Map<String, MarketTicker>> future = new CompletableFuture<>();
         omgfinApiService.getMarketTickers().enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    @Override
+    public CompletableFuture<OrderBook> getOrderBook(String market, Integer limit) {
+        CompletableFuture<OrderBook> future = new CompletableFuture<>();
+        omgfinApiService.getOrderBook(market, limit).enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }

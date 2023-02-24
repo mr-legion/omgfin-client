@@ -5,6 +5,7 @@ import io.algostrategy.client.omgfin.OmgfinApiRestClient;
 import io.algostrategy.client.omgfin.domain.general.Asset;
 import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 import io.algostrategy.client.omgfin.domain.market.MarketTicker;
+import io.algostrategy.client.omgfin.domain.market.OrderBook;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -35,5 +36,13 @@ public class OmgfinApiRestClientImplTest {
     public void getMarketTickers_ShouldReturnMarketTickers() {
         Map<String, MarketTicker> marketTickers = omgfinApiRestClient.getMarketTickers();
         assertThat(marketTickers, allOf(notNullValue(), is(not(anEmptyMap()))));
+    }
+
+    @Test
+    public void getOrderBook_ShouldReturnOrderBookForETHBTC() {
+        OrderBook orderBook = omgfinApiRestClient.getOrderBook("ETHBTC", 5);
+        assertNotNull(orderBook);
+        assertThat(orderBook.getAsks(), is(not(empty())));
+        assertThat(orderBook.getBids(), is(not(empty())));
     }
 }

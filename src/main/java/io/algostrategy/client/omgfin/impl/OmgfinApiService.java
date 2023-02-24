@@ -3,8 +3,11 @@ package io.algostrategy.client.omgfin.impl;
 import io.algostrategy.client.omgfin.domain.general.Asset;
 import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 import io.algostrategy.client.omgfin.domain.market.MarketTicker;
+import io.algostrategy.client.omgfin.domain.market.OrderBook;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +29,7 @@ public interface OmgfinApiService {
 
     @GET("/api/v1/ticker/summary")
     Call<Map<String, MarketTicker>> getMarketTickers();
+
+    @GET("/api/v1/orderbook/{market}")
+    Call<OrderBook> getOrderBook(@Path("market") String market, @Query("limit") Integer limit);
 }
