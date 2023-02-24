@@ -4,9 +4,11 @@ import io.algostrategy.client.omgfin.OmgfinApiAsyncRestClient;
 import io.algostrategy.client.omgfin.OmgfinApiClientFactory;
 import io.algostrategy.client.omgfin.domain.general.Asset;
 import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
+import io.algostrategy.client.omgfin.domain.market.MarketTicker;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,5 +30,11 @@ public class OmgfinApiAsyncRestClientImplTest {
         ExchangeInfo exchangeInfo = omgfinApiAsyncRestClient.getExchangeInfo().get();
         assertNotNull(exchangeInfo);
         assertThat(exchangeInfo.getMarkets(), is(not(empty())));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() throws ExecutionException, InterruptedException {
+        Map<String, MarketTicker> marketTickers = omgfinApiAsyncRestClient.getMarketTickers().get();
+        assertThat(marketTickers, allOf(notNullValue(), is(not(anEmptyMap()))));
     }
 }
