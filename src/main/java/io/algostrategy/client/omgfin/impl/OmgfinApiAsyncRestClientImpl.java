@@ -2,6 +2,7 @@ package io.algostrategy.client.omgfin.impl;
 
 import io.algostrategy.client.omgfin.OmgfinApiAsyncRestClient;
 import io.algostrategy.client.omgfin.domain.general.Asset;
+import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -23,6 +24,15 @@ public class OmgfinApiAsyncRestClientImpl implements OmgfinApiAsyncRestClient {
     public CompletableFuture<List<Asset>> getAssets() {
         CompletableFuture<List<Asset>> future = new CompletableFuture<>();
         omgfinApiService.getAssets().enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    // Market endpoints
+
+    @Override
+    public CompletableFuture<ExchangeInfo> getExchangeInfo() {
+        CompletableFuture<ExchangeInfo> future = new CompletableFuture<>();
+        omgfinApiService.getExchangeInfo().enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }

@@ -1,6 +1,7 @@
 package io.algostrategy.client.omgfin;
 
 import io.algostrategy.client.omgfin.domain.general.Asset;
+import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 
 import java.util.List;
 
@@ -17,4 +18,13 @@ public interface OmgfinApiRestClient {
      * @return assets
      */
     List<Asset> getAssets();
+
+    // Market endpoints
+
+    /**
+     * Get market information.
+     *
+     * @return market info
+     */
+    ExchangeInfo getExchangeInfo();
 }

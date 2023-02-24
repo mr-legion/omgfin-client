@@ -3,12 +3,14 @@ package io.algostrategy.client.omgfin.impl;
 import io.algostrategy.client.omgfin.OmgfinApiClientFactory;
 import io.algostrategy.client.omgfin.OmgfinApiRestClient;
 import io.algostrategy.client.omgfin.domain.general.Asset;
+import io.algostrategy.client.omgfin.domain.market.ExchangeInfo;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class OmgfinApiRestClientImplTest {
 
@@ -18,5 +20,12 @@ public class OmgfinApiRestClientImplTest {
     public void getAssets_ShouldReturnAssets() {
         List<Asset> assets = omgfinApiRestClient.getAssets();
         assertThat(assets, is(not(empty())));
+    }
+
+    @Test
+    public void getExchangeInfo_ShouldReturnExchangeInfo() {
+        ExchangeInfo exchangeInfo = omgfinApiRestClient.getExchangeInfo();
+        assertNotNull(exchangeInfo);
+        assertThat(exchangeInfo.getMarkets(), is(not(empty())));
     }
 }
